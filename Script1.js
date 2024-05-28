@@ -30,15 +30,37 @@ function validateForm() {
         feedback1.innerHTML += 'The email is used.<br>';
         valid = false;
     }
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-        feedback.innerHTML += 'The username contains invalid characters.<br>';
+    
+
+    if (email == '') {
+        feedback1.innerHTML += 'This field is empty.<br>';
         valid = false;
+    }
+    
+
+    if (password == '') {
+        feedback2.innerHTML += 'This field is empty.<br>';
+        valid = false;
+    }
+    else {
+        if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
+            feedback2.innerHTML += 'The password is too simple. Must contain letters and numbers.<br>';
+            valid = false;
+        }
     }
 
-    if (!/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
-        feedback2.innerHTML += 'The password is too simple. Must contain letters and numbers.<br>';
+    if (username == '') {
+        feedback.innerHTML += 'This field is empty.<br>';
         valid = false;
     }
+    else {
+        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+            feedback.innerHTML += 'The username contains invalid characters.<br>';
+            valid = false;
+        }
+    }
+
+    
 
     if (password !== confirmPassword) {
         feedback3.innerHTML += 'Password mismatch.<br>';
@@ -63,13 +85,18 @@ function checkdb() {
     feedback.innerHTML = '';
     
     const user = db.find(user => user.email === email);
-    if (user && user.password === password) {
-        alert('You are successfully registered');
-        return valid;
-        // Здесь могут быть действия, например, переход на другую страницу
+    if (user) {
+        if (user.password === password) {
+            alert('You are successfully registered');
+            return valid;
+        }
+        else {
+            feedback.innerHTML += 'Invalid password entered.<br>';
+            valid = false;
+        }
     } else {
-        feedback.innerHTML += 'Invalid password or email address entered.<br>';
-        valid = false;
+        feedback.innerHTML += 'This user is not registered.<br>';
+            return valid;
     };
     return valid;
 }
