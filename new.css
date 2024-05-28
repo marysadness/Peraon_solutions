@@ -1,0 +1,15 @@
+.main_style {
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 
+        0 0px 4px rgb(234, 234, 234),
+        0 0px 4px rgb(234, 234, 234),
+        0 0px 4px rgb(234, 234, 234),
+        0 0px 4px rgb(234, 234, 234),
+        0 0px 4px rgb(234, 234, 234);
+}
+
+.link {
+    margin-top: 20px;
+}
+
